@@ -31,11 +31,16 @@ while x>0
   x-=1
 end
 puts
+x = 5
 5.times do
   print "#"
 end
 puts
 x.times do
   print "#"
+end
+puts
+5.times do |i|
+  print "#"+i.to_s
 end
 puts
