@@ -1,0 +1,10 @@
+#! /usr/local/bin/ruby
+# lesson_6
+# cat.rb
+# 环境变量 PATH
+
+File.open(ARGV[0], "r") do |f|
+  while line = f.gets
+    puts line
+  end
+end
