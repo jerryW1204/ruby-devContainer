@@ -8,7 +8,11 @@ port = 'http'
 path = '/~toshi/'
 
 sock = TCPSocket.new host, port
-cmd = 'GET ' + path + "\r\n"
+cmd = 'GET ' + path + " HTTP/1.0\r\n\r\n"
+pp cmd
+sock.print cmd
+
+cmd = "\r\n"
 pp cmd
 sock.print cmd
 
