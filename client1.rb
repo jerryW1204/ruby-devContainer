@@ -12,10 +12,18 @@ cmd = 'GET ' + path + " HTTP/1.0\r\n\r\n"
 pp cmd
 sock.print cmd
 
-cmd = "\r\n"
-pp cmd
-sock.print cmd
+# is_body = false
+# while line = sock.gets
+#   if line == "<!DOCTYPE html>\n"
+#     is_body = true
+#   end
+#   if is_body
+#     puts line
+#   end
+# end
 
+is_body = false
 while line = sock.gets
-  puts line
+  puts line if is_body
+  is_body = true if line == "\r\n"
 end
