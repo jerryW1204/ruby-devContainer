@@ -4,3 +4,11 @@ http://www.is.kyusan-u.ac.jp/~toshi/
 1. www.is kyusan-u.ac.jp に　http　で接続
 2．~toshi/コンテンツを取る
 3. コンテンツを表示
+
+
+schema://host/path
+
+
+
+TCP: process名
+IP: IP地址->Host
