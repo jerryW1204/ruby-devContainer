@@ -3,9 +3,16 @@
 
 require 'socket'
 
-host = 'www.is.kyusan-u.ac.jp'
+# 参数1: host
+# 参数2: post
+host = ARGV[0]
 port = 'http'
-path = '/~toshi/'
+path = ARGV[1]
+# host = 'www.is.kyusan-u.ac.jp'
+# path = '/~toshi/'
+if path ==  nil
+  path = '/'
+end
 
 # host1 = 'Host: ' + host + "\r\n\r\n" # v1
 sock = TCPSocket.new host, port
