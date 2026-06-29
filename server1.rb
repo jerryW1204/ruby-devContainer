@@ -16,7 +16,9 @@ gs = TCPServer.open 'http'
 loop do
   pp "start accept"
   s = gs.accept
-  server s
-  sleep 10 # 10s
+  Thread.new do
+    server s
+    sleep 10 # 10s
+  end
 end
 
