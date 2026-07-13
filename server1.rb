@@ -18,13 +18,32 @@ def server s
     s.print "\r\n"
     pp "INDEX"
     s.puts "<h1>index</hi>"
+  elsif path == "/api/now"
+    s.print "HTTP/1.0 200 OK\r\n"
+    s.print "Content-Type: application/json\r\n"
+    s.print "\r\n"
+    s.print "{"
+    s.print '"time": "' + "#{Time.now}" + '"'
+    s.print "}"
   else
     file = path.slice 1..-1
-    File.open(file, "r") do |f|
-      while line = f.gets
-        s.puts line
+    if File.exist? file
+      s.print "HTTP/1.0 200 ok\r\n"
+      s.print "Content-Type: text/plain; charset=UTF-8\r\n"
+      s.print "\r\n"
+      File.open(file, "r") do |f|
+        while line = f.gets
+          s.puts line
+        end
       end
+    else
+      s.print "HTTP/1.0 404 NotFound\r\n"
+      s.print "Content-Type: text/html\r\n"
+      s.print "\r\n"
+      s.print "<h1>"+path+"<h1>"
+      s.print "File not Found"
     end
+
   end
   # while line = s.gets
   #   pp line
