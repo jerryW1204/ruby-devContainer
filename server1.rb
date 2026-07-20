@@ -17,7 +17,7 @@ def server s
     s.print "Content-Type: text/html\r\n"
     s.print "\r\n"
     pp "INDEX"
-    s.puts "<h1>index</hi>"
+    s.puts "<h1>index</h1>"
   elsif path == "/api/now"
     s.print "HTTP/1.0 200 OK\r\n"
     s.print "Content-Type: application/json\r\n"
