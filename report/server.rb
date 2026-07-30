@@ -16,25 +16,47 @@ def server s
   end
 
   if path == "/"
-    s.print "HTTP/1.0 200 ok\r\n"
+    s.print "Protocol 200 ok\r\n"
     s.print "Content-Type: text/html\r\n"
     s.print "\r\n"
-    s.puts "<h1>index</h1>"
+    s.puts "<h1>Welcom!!</h1>"
+  elsif path == "/api/now"
+    s.print "Protocol 200 OK\r\n"
+    s.print "Content-Type: application/json\r\n"
+    s.print "\r\n"
+    s.print "{"
+    s.print '"time": "' + "#{Time.now}" + '"'
+    s.print "}"
   elsif path == "/favicon.ico"
-    s.print "HTTP/1.0 200 ok\r\n"
-    s.print "Content-Type: image/x-icon\r\n"
+    icon = File.join(__dir__, "House.png")
+    s.print "Protocol 200 ok\r\n"
+    s.print "Content-Type: image/png\r\n"
     s.print "\r\n"
-    # if file.exist?("favicon.ico")
-    #   file.open("favicon.ico", "rb") do |f|
-    #     ico = f.read()
-    #     s.print ico
-    #   end
-    # end
+    if File.exist? icon
+      File.open(icon, "rb") do |f|
+        ico = f.read()
+        s.print ico
+      end
+    end
   else
-    s.print "HTTP/1.0 404 Not Found\r\n"
-    s.print "Content-Type: text/html\r\n"
-    s.print "\r\n"
-    s.puts "Error: #{path} is not found"
+    file = path.slice 1..-1
+    file = File.join(__dir__, file)
+    if File.exist? file
+      s.print "Protocol 200 ok\r\n"
+      s.print "Content-Type: text/plain; charset=UTF-8\r\n"
+      s.print "\r\n"
+      File.open(file, "rb") do |f|
+        while line = f.gets
+          s.puts line
+        end
+      end
+    else
+      s.print "Protocol 404 NotFound\r\n"
+      s.print "Content-Type: text/html\r\n"
+      s.print "\r\n"
+      s.print "<h1>"+path+"<h1>"
+      s.print "Error: #{path} is not Found"
+    end
   end
   s.close
 end

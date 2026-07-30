@@ -12,11 +12,10 @@ end
 
 s = TCPSocket.new host, port
 
-cmd = "GET #{path} HTTP/1.1\r\n"
+cmd = "GET #{path} Protocol\r\n"
 cmd += "Host: #{host}\r\n"
 cmd += "Connection: close\r\n"
 cmd += "\r\n"
-
 # pp cmd
 s.print cmd
 
